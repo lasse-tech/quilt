@@ -1,5 +1,5 @@
 public class Quilt {
-    public void main(String[] args) {
+    public static void main(String[] args) {
         Manager cQuilt = new Manager(args);
         int cHeight = cQuilt.getHeight();
         int cWidth = cQuilt.getWidth();
@@ -13,14 +13,14 @@ public class Quilt {
         int x = 5;
         int y = 10;
         int[][] tebbich = new int[x][y];
-        cQuilt.initRandom(tebbich, colorArray);
+        Quilt.initRandom(tebbich, colorArray);
         for (i = 0; i < diffColor; i++) {
             System.out.println("I: " + i + " Anzahl der Farben: " + colorArray[i]);
         }
         boolean testQuilt = cQuilt.testRandomQuilt(tebbich);
     }
 
-    public int randomColor(int[] cArray) {
+    public static int randomColor(int[] cArray) {
         int min = 0;
         int max = 8;
         int random;
@@ -32,21 +32,21 @@ public class Quilt {
 
     }
 
-    public void initRandom(int[][] square, int[] cArray) {
+    public static void initRandom(int[][] square, int[] cArray) {
         int i, j;
         for (i = 0; i < square.length; i++) {
             for (j = 0; j < square[0].length; j++) {
-                int intRandom = cQuilt.randomColor(cArray);
+                int intRandom = Quilt.randomColor(cArray);
                 int arrayValue = cArray[intRandom];
                 System.out.println("Farbe: " + intRandom);
                 System.out.println("Anzahl Farbplaettchen: " + arrayValue);
                 square[i][j] = intRandom;
-                cQuilt.fixPatch(square, cArray, i, j);
+                Quilt.fixPatch(square, cArray, i, j);
             }
         }
     }
 
-    public boolean fixPatch(int[][] square, int[] cArray, int Zeile, int Spalte) {
+    public static boolean fixPatch(int[][] square, int[] cArray, int Zeile, int Spalte) {
         int istFarbe = square[Zeile][Spalte];
         int[] neighbors = cQuilt.getNeighbors(square, Zeile, Spalte);
         int i = 0;
@@ -54,7 +54,7 @@ public class Quilt {
             if (neighbors[i] != istFarbe) {
                 i++;
             } else {
-                istFarbe = cQuilt.randomColor(cArray);
+                istFarbe = Quilt.randomColor(cArray);
                 i = 0;
             }
         }
